@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ngopinge Game</title>
+</head>
+
+<body>
+
+<h1>NGOPINGE GAME</h1>
+
+<script>
+
+let nama = prompt("Nama pelanggan:");
+
+let jam = parseInt(prompt("Berapa jam main?"));
+
+let hargaPerJam;
+
+// Tarif PS
+if (jam >= 3) {
+    hargaPerJam = 5000;
+} else {
+    hargaPerJam = 6000;
+}
+
+let totalPs = jam * hargaPerJam;
+
+let totalMakanan = 0;
+
+let lagi = "y";
+
+while (lagi == "y") {
+
+    let menu = prompt("Masukkan kode menu:");
+
+    // Kode Menu:
+    // 1 = Mie Rebus
+    // 2 = Kopi Hitam
+    // 3 = Teh Hangat
+    // 4 = Es Teh
+    // 5 = Es Nutrisari
+    // 6 = Es Susu
+    // 7 = Good Day Freeze
+
+    if (menu == 1) {
+        totalMakanan += 6000;
+    }
+    else if (menu == 2) {
+        totalMakanan += 3000;
+    }
+    else if (menu == 3) {
+        totalMakanan += 3000;
+    }
+    else if (menu == 4) {
+        totalMakanan += 4000;
+    }
+    else if (menu == 5) {
+        totalMakanan += 4000;
+    }
+    else if (menu == 6) {
+        totalMakanan += 5000;
+    }
+    else if (menu == 7) {
+        totalMakanan += 5000;
+    }
+
+    lagi = prompt("Tambah menu lagi? y/t");
+}
+
+let total = totalPs + totalMakanan;
+
+document.write("<h2>STRUK PEMBAYARAN</h2>");
+document.write("Nama : " + nama + "<br>");
+document.write("Jam Main : " + jam + " jam<br>");
+document.write("Biaya PS : Rp " + totalPs + "<br>");
+document.write("Makanan/Minuman : Rp " + totalMakanan + "<br>");
+document.write("<h3>Total Bayar : Rp " + total + "</h3>");
+
+</script>
+
+</body>
+</html>

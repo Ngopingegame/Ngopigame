@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> NGOPI NGEGAME </title>
+    NGOPI NGEGAME
 </head>
 <body>
 

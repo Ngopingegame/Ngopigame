@@ -112,6 +112,18 @@ table td{
     text-transform:uppercase;
 }
 
+.reset-btn{
+    margin-top:20px;
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:14px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    width:100%;
+}
+
 @media(max-width:900px){
 
     .grid{
@@ -161,6 +173,7 @@ table td{
                     <th>Jam</th>
                     <th>Total</th>
                     <th>Waktu</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
 
@@ -169,6 +182,10 @@ table td{
             </tbody>
 
         </table>
+
+        <button class="reset-btn" onclick="resetSemua()">
+            RESET SEMUA TRANSAKSI
+        </button>
 
     </div>
 
@@ -185,7 +202,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
   getDatabase,
   ref,
-  onValue
+  onValue,
+  remove
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
@@ -203,6 +221,26 @@ const app = initializeApp(firebaseConfig);
 
 const database = getDatabase(app);
 
+window.hapusTransaksi = function(id){
+
+    if(confirm('Hapus transaksi ini?')){
+
+        remove(ref(database, 'transaksi/' + id));
+
+    }
+
+}
+
+window.resetSemua = function(){
+
+    if(confirm('Hapus semua transaksi?')){
+
+        remove(ref(database, 'transaksi'));
+
+    }
+
+}
+
 const transaksiRef = ref(database, 'transaksi');
 
 onValue(transaksiRef, (snapshot) => {
@@ -215,20 +253,39 @@ onValue(transaksiRef, (snapshot) => {
 
     let pendapatan = 0;
 
-    for(let id in data){
+    if(data){
 
-        jumlah++;
+        for(let id in data){
 
-        pendapatan += data[id].total;
+            jumlah++;
 
-        tabel += `
+            pendapatan += data[id].total;
+
+            tabel += `
             <tr>
                 <td>${data[id].nama}</td>
                 <td>${data[id].jam} Jam</td>
                 <td>Rp ${data[id].total.toLocaleString('id-ID')}</td>
                 <td>${data[id].waktu}</td>
+
+                <td>
+                    <button onclick="hapusTransaksi('${id}')"
+                    style="
+                    background:#ef4444;
+                    color:white;
+                    border:none;
+                    padding:8px 12px;
+                    border-radius:8px;
+                    cursor:pointer;
+                    ">
+                    Hapus
+                    </button>
+                </td>
+
             </tr>
-        `;
+            `;
+        }
+
     }
 
     document.getElementById('dataTransaksi').innerHTML = tabel;

@@ -576,7 +576,7 @@ document.getElementById('uangBayar').addEventListener('input',updateTotal);
     margin-top:40px;
     padding:18px;
     color:#00ffcc;
-    font-size:16px;
+    font-size:10px;
     letter-spacing:2px;
     text-transform:uppercase;
     opacity:0.7;
@@ -587,5 +587,28 @@ document.getElementById('uangBayar').addEventListener('input',updateTotal);
 <footer class="footer">
     by asyraf
 </footer>
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDtxgmyjXf-JTjpDNku_LZwO4GXniLvSVE",
+  authDomain: "ngopingegame-3e92c.firebaseapp.com",
+  databaseURL: "https://ngopingegame-3e92c-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "ngopingegame-3e92c",
+  storageBucket: "ngopingegame-3e92c.firebasestorage.app",
+  messagingSenderId: "810064465459",
+  appId: "1:810064465459:web:b8564ed2898f41d24e5d46",
+  measurementId: "G-Y8PSYJDYD4"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const analytics = getAnalytics(app);
+
+</script>
+  
 </body>
 </html>

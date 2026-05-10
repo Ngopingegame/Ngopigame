@@ -1,82 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Ngopinge Game</title>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NGOPINGE GAME - Kasir Gaming</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #050816, #0f172a);
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 42px;
+      margin-bottom: 10px;
+      color: #00ffcc;
+      text-shadow: 0 0 15px #00ffcc;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #94a3b8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(0,255,204,0.2);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,255,204,0.1);
+    }
+
+    .section-title {
+      margin-bottom: 20px;
+      color: #00ffcc;
+      font-size: 22px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .menu-btn {
+      background: #111827;
+      border: 1px solid #00ffcc;
+      color: white;
+      padding: 18px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+    }
+
+    .menu-btn:hover {
+      transform: scale(1.05);
+      background: #00ffcc;
+      color: black;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      background: #1e293b;
+      color: white;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .total {
+      margin-top: 20px;
+      font-size: 26px;
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    .btn-bayar {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #00ffcc;
+      color: black;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-bayar:hover {
+      transform: scale(1.03);
+    }
+
+    @media(max-width: 800px){
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
 <body>
 
-<h1>NGOPINGE GAME</h1>
+  <div class="container">
 
-<script>
+    <h1 class="title">NGOPINGE GAME</h1>
+    <p class="subtitle">Kasir Rental PS Gaming Neon</p>
 
-let nama = prompt("Nama pelanggan:");
+    <div class="grid">
 
-let jam = parseInt(prompt("Berapa jam main?"));
+      <div class="card">
 
-let hargaPerJam;
+        <h2 class="section-title">Data Pelanggan</h2>
 
-// Tarif PS
-if (jam >= 3) {
-    hargaPerJam = 5000;
-} else {
-    hargaPerJam = 6000;
-}
+        <input type="text" id="nama" placeholder="Nama pelanggan">
 
-let totalPs = jam * hargaPerJam;
+        <input type="number" id="jam" placeholder="Berapa jam main?">
 
-let totalMakanan = 0;
+        <h2 class="section-title">Menu Makanan & Minuman</h2>
 
-let lagi = "y";
+        <div class="menu-grid">
 
-while (lagi == "y") {
+          <button class="menu-btn" onclick="tambahMenu('Mie Rebus',6000)">
+            Mie Rebus<br>Rp 6.000
+          </button>
 
-    let menu = prompt("Masukkan kode menu:");
+          <button class="menu-btn" onclick="tambahMenu('Kopi Hitam',3000)">
+            Kopi Hitam<br>Rp 3.000
+          </button>
 
-    // Kode Menu:
-    // 1 = Mie Rebus
-    // 2 = Kopi Hitam
-    // 3 = Teh Hangat
-    // 4 = Es Teh
-    // 5 = Es Nutrisari
-    // 6 = Es Susu
-    // 7 = Good Day Freeze
+          <button class="menu-btn" onclick="tambahMenu('Teh Hangat',3000)">
+            Teh Hangat<br>Rp 3.000
+          </button>
 
-    if (menu == 1) {
-        totalMakanan += 6000;
+          <button class="menu-btn" onclick="tambahMenu('Es Teh',4000)">
+            Es Teh<br>Rp 4.000
+          </button>
+
+          <button class="menu-btn" onclick="tambahMenu('Es Nutrisari',4000)">
+            Es Nutrisari<br>Rp 4.000
+          </button>
+
+          <button class="menu-btn" onclick="tambahMenu('Es Susu',5000)">
+            Es Susu<br>Rp 5.000
+          </button>
+
+          <button class="menu-btn" onclick="tambahMenu('Good Day Freeze',5000)">
+            Good Day Freeze<br>Rp 5.000
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <h2 class="section-title">Struk Pembayaran</h2>
+
+        <div id="cart"></div>
+
+        <div class="total" id="total">
+          Total : Rp 0
+        </div>
+
+        <button class="btn-bayar" onclick="hitungTotal()">
+          HITUNG TOTAL
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    let totalMakanan = 0;
+
+    function tambahMenu(nama, harga){
+
+      totalMakanan += harga;
+
+      let cart = document.getElementById('cart');
+
+      cart.innerHTML += `
+        <div class="cart-item">
+          <span>${nama}</span>
+          <span>Rp ${harga}</span>
+        </div>
+      `;
+
+      updateTotal();
     }
-    else if (menu == 2) {
-        totalMakanan += 3000;
-    }
-    else if (menu == 3) {
-        totalMakanan += 3000;
-    }
-    else if (menu == 4) {
-        totalMakanan += 4000;
-    }
-    else if (menu == 5) {
-        totalMakanan += 4000;
-    }
-    else if (menu == 6) {
-        totalMakanan += 5000;
-    }
-    else if (menu == 7) {
-        totalMakanan += 5000;
+
+    function updateTotal(){
+
+      let jam = parseInt(document.getElementById('jam').value) || 0;
+
+      let hargaPerJam;
+
+      if(jam >= 3){
+        hargaPerJam = 5000;
+      } else {
+        hargaPerJam = 6000;
+      }
+
+      let totalPs = jam * hargaPerJam;
+
+      let total = totalPs + totalMakanan;
+
+      document.getElementById('total').innerHTML =
+      `Total : Rp ${total.toLocaleString('id-ID')}`;
     }
 
-    lagi = prompt("Tambah menu lagi? y/t");
-}
+    function hitungTotal(){
+      updateTotal();
 
-let total = totalPs + totalMakanan;
+      let nama = document.getElementById('nama').value;
 
-document.write("<h2>STRUK PEMBAYARAN</h2>");
-document.write("Nama : " + nama + "<br>");
-document.write("Jam Main : " + jam + " jam<br>");
-document.write("Biaya PS : Rp " + totalPs + "<br>");
-document.write("Makanan/Minuman : Rp " + totalMakanan + "<br>");
-document.write("<h3>Total Bayar : Rp " + total + "</h3>");
+      alert('Pembayaran berhasil untuk ' + nama);
+    }
 
-</script>
+    document.getElementById('jam').addEventListener('input', updateTotal);
+
+  </script>
 
 </body>
 </html>

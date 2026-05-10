@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
-  <!-- Pengaturan karakter dan tampilan responsive HP -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Judul website -->
-  <title>NGOPINGEGAME - Kasir Modern</title>
+  <title>NGOPINGE GAME - Kasir Modern</title>
 
   <style>
-
-    /* Reset dasar supaya tampilan rapi di semua browser */
     * {
       margin: 0;
       padding: 0;
@@ -19,7 +13,6 @@
       font-family: Arial, sans-serif;
     }
 
-    /* Tampilan background utama website */
     body {
       background: #050816;
       color: white;
@@ -27,13 +20,11 @@
       padding: 20px;
     }
 
-    /* Container utama aplikasi */
     .container {
       max-width: 1300px;
       margin: auto;
     }
 
-    /* Header bagian atas */
     .header {
       display: flex;
       justify-content: space-between;
@@ -46,7 +37,6 @@
       box-shadow: 0 0 20px rgba(0,255,204,0.1);
     }
 
-    /* Logo tulisan utama */
     .logo {
       font-size: 34px;
       font-weight: bold;
@@ -54,20 +44,17 @@
       text-shadow: 0 0 12px #00ffcc;
     }
 
-    /* Jam realtime */
     .jam {
       font-size: 18px;
       color: #94a3b8;
     }
 
-    /* Layout kiri kanan */
     .grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 20px;
     }
 
-    /* Card / kotak */
     .card {
       background: #0f172a;
       border-radius: 20px;
@@ -76,14 +63,12 @@
       box-shadow: 0 0 15px rgba(0,255,204,0.08);
     }
 
-    /* Judul setiap section */
     .section-title {
       color: #00ffcc;
       margin-bottom: 20px;
       font-size: 24px;
     }
 
-    /* Grup input */
     .input-group {
       margin-bottom: 15px;
     }
@@ -94,7 +79,6 @@
       color: #cbd5e1;
     }
 
-    /* Style input dan select */
     input, select {
       width: 100%;
       padding: 14px;
@@ -105,7 +89,6 @@
       font-size: 16px;
     }
 
-    /* Grid menu makanan */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -113,7 +96,6 @@
       margin-top: 20px;
     }
 
-    /* Tombol menu */
     .menu-btn {
       background: #111827;
       border: 1px solid #00ffcc;
@@ -125,7 +107,6 @@
       text-align: center;
     }
 
-    /* Efek hover saat disentuh */
     .menu-btn:hover {
       transform: scale(1.05);
       background: #00ffcc;
@@ -142,14 +123,12 @@
       font-size: 15px;
     }
 
-    /* Area daftar pesanan */
     .cart {
       max-height: 350px;
       overflow-y: auto;
       margin-bottom: 20px;
     }
 
-    /* Item pesanan */
     .cart-item {
       display: flex;
       justify-content: space-between;
@@ -160,7 +139,6 @@
       margin-bottom: 10px;
     }
 
-    /* Ringkasan pembayaran */
     .summary {
       margin-top: 20px;
       border-top: 1px solid rgba(255,255,255,0.1);
@@ -174,7 +152,6 @@
       color: #cbd5e1;
     }
 
-    /* Total pembayaran */
     .total {
       font-size: 30px;
       color: #00ffcc;
@@ -182,7 +159,6 @@
       text-shadow: 0 0 10px #00ffcc;
     }
 
-    /* Tombol umum */
     .btn {
       width: 100%;
       padding: 15px;
@@ -195,13 +171,11 @@
       transition: 0.2s;
     }
 
-    /* Tombol bayar */
     .btn-bayar {
       background: #00ffcc;
       color: black;
     }
 
-    /* Tombol reset */
     .btn-reset {
       background: #ef4444;
       color: white;
@@ -211,7 +185,6 @@
       transform: scale(1.02);
     }
 
-    /* Status pembayaran */
     .status {
       margin-top: 15px;
       text-align: center;
@@ -219,7 +192,6 @@
       font-weight: bold;
     }
 
-    /* Responsive HP */
     @media(max-width:900px){
       .grid {
         grid-template-columns: 1fr;
@@ -231,47 +203,36 @@
         text-align: center;
       }
     }
-
   </style>
 </head>
 <body>
 
-<!-- Container utama -->
 <div class="container">
 
-  <!-- Header -->
   <div class="header">
-    <div class="logo">NGOPINGEGAME</div>
-
-    <!-- Jam realtime -->
+    <div class="logo">NGOPINGE GAME</div>
     <div class="jam" id="jamRealtime"></div>
   </div>
 
-  <!-- Layout kiri kanan -->
   <div class="grid">
 
-    <!-- Bagian kiri -->
     <div class="card">
 
-      <h2 class="section-title">Data pelanggan</h2>
+      <h2 class="section-title">Data Rental PS</h2>
 
-      <!-- Input nama -->
       <div class="input-group">
         <label>Nama Pelanggan</label>
         <input type="text" id="nama" placeholder="Masukkan nama pelanggan">
       </div>
 
-      <!-- Pilihan jenis PS -->
       <div class="input-group">
         <label>Pilih Playstation</label>
-
         <select id="jenisPs">
           <option>PS4</option>
           <option>PS5</option>
         </select>
       </div>
 
-      <!-- Input jam main -->
       <div class="input-group">
         <label>Jam Main</label>
         <input type="number" id="jam" placeholder="Masukkan jam bermain">
@@ -279,18 +240,15 @@
 
       <h2 class="section-title">Menu Makanan & Minuman</h2>
 
-      <!-- Tombol menu -->
       <div class="menu-grid">
-
-        <!-- Setiap tombol memanggil function tambahMenu -->
 
         <div class="menu-btn" onclick="tambahMenu('Mie Rebus',6000)">
           <div class="menu-name">Mie Rebus</div>
           <div class="menu-price">Rp 6.000</div>
         </div>
 
-        <div class="menu-btn" onclick="tambahMenu('Kopi',3000)">
-          <div class="menu-name">Kopi</div>
+        <div class="menu-btn" onclick="tambahMenu('Kopi Hitam',3000)">
+          <div class="menu-name">Kopi Hitam</div>
           <div class="menu-price">Rp 3.000</div>
         </div>
 
@@ -323,15 +281,12 @@
 
     </div>
 
-    <!-- Bagian kanan -->
     <div class="card">
 
       <h2 class="section-title">Kasir & Struk</h2>
 
-      <!-- Daftar pesanan -->
       <div class="cart" id="cart"></div>
 
-      <!-- Ringkasan pembayaran -->
       <div class="summary">
 
         <div class="input-group" style="margin-bottom:20px;">
@@ -354,32 +309,24 @@
           <span id="biayaMenu">Rp 0</span>
         </div>
 
-        <!-- Total keseluruhan -->
         <div class="total" id="totalBayar">
           Rp 0
         </div>
 
       </div>
 
-      <!-- Tombol bayar -->
       <button class="btn btn-bayar" onclick="bayar()">
         BAYAR SEKARANG
       </button>
 
-      <!-- Tombol reset -->
       <button class="btn btn-reset" onclick="resetKasir()">
         RESET KASIR
       </button>
 
-      <!-- Status transaksi -->
       <div class="status" id="status"></div>
 
-      <!-- Rangkuman penjualan -->
       <div class="summary" style="margin-top:30px;">
-
-        <h3 style="margin-bottom:15px;color:#00ffcc;">
-          Rangkuman Penjualan
-        </h3>
+        <h3 style="margin-bottom:15px;color:#00ffcc;">Rangkuman Penjualan</h3>
 
         <div class="summary-item">
           <span>Total Transaksi</span>
@@ -390,7 +337,6 @@
           <span>Total Pendapatan</span>
           <span id="totalPendapatan">Rp 0</span>
         </div>
-
       </div>
 
     </div>
@@ -401,73 +347,49 @@
 
 <script>
 
-  // Menyimpan total makanan
-  let totalMenu = 0;
+let totalMenu = 0;
+let jumlahTransaksi = 0;
+let totalPendapatan = 0;
 
-  // Menyimpan jumlah transaksi
-  let jumlahTransaksi = 0;
+function updateJam(){
+  const now = new Date();
+  document.getElementById('jamRealtime').innerHTML = now.toLocaleString('id-ID');
+}
 
-  // Menyimpan total semua pendapatan
-  let totalPendapatan = 0;
+setInterval(updateJam,1000);
+updateJam();
 
-  // Function update jam realtime
-  function updateJam(){
+function tambahMenu(nama,harga){
 
-    // Mengambil waktu sekarang
-    const now = new Date();
+  totalMenu += harga;
 
-    // Menampilkan waktu ke HTML
-    document.getElementById('jamRealtime').innerHTML =
-    now.toLocaleString('id-ID');
+  const cart = document.getElementById('cart');
+
+  cart.innerHTML += `
+    <div class="cart-item">
+      <span>${nama}</span>
+      <span>Rp ${harga.toLocaleString('id-ID')}</span>
+    </div>
+  `;
+
+  updateTotal();
+}
+
+function updateTotal(){
+
+  let jam = parseInt(document.getElementById('jam').value) || 0;
+
+  let hargaPerJam;
+
+  if(jam >= 3){
+    hargaPerJam = 5000;
+  } else {
+    hargaPerJam = 6000;
   }
 
-  // Update jam setiap 1 detik
-  setInterval(updateJam,1000);
+  let totalPs = jam * hargaPerJam;
 
-  // Menjalankan pertama kali
-  updateJam();
-
-  // Function tambah menu
-  function tambahMenu(nama,harga){
-
-    // Menambahkan harga ke total menu
-    totalMenu += harga;
-
-    // Mengambil element cart
-    const cart = document.getElementById('cart');
-
-    // Menambahkan item baru ke cart
-    cart.innerHTML += `
-      <div class="cart-item">
-        <span>${nama}</span>
-        <span>Rp ${harga.toLocaleString('id-ID')}</span>
-      </div>
-    `;
-
-    // Update total pembayaran
-    updateTotal();
-  }
-
-  // Function hitung total
-  function updateTotal(){
-
-    // Mengambil input jam
-    let jam = parseInt(document.getElementById('jam').value) || 0;
-
-    let hargaPerJam;
-
-    // Diskon jika bermain 3 jam atau lebih
-    if(jam >= 3){
-      hargaPerJam = 5000;
-    } else {
-      hargaPerJam = 6000;
-    }
-
-    // Hitung biaya PS
-    let totalPs = jam * hargaPerJam;
-
-    // Hitung total akhir
-    let total = totalPs + totalMenu;
+  let total = totalPs + totalMenu;
 
   let uangBayar = parseInt(document.getElementById('uangBayar').value) || 0;
 
@@ -477,98 +399,75 @@
     kembali = 0;
   }
 
-    // Menampilkan biaya PS
-    document.getElementById('biayaPs').innerHTML =
-    'Rp ' + totalPs.toLocaleString('id-ID');
+  document.getElementById('biayaPs').innerHTML =
+  'Rp ' + totalPs.toLocaleString('id-ID');
 
-    // Menampilkan biaya menu
-    document.getElementById('biayaMenu').innerHTML =
-    'Rp ' + totalMenu.toLocaleString('id-ID');
+  document.getElementById('biayaMenu').innerHTML =
+  'Rp ' + totalMenu.toLocaleString('id-ID');
 
-    // Menampilkan total pembayaran
-    document.getElementById('totalBayar').innerHTML =
+  document.getElementById('totalBayar').innerHTML =
   'Rp ' + total.toLocaleString('id-ID');
 
   document.getElementById('kembalian').innerHTML =
   'Rp ' + kembali.toLocaleString('id-ID');
+}
+
+function bayar(){
+
+  updateTotal();
+
+  let nama = document.getElementById('nama').value;
+
+  if(nama == ''){
+    alert('Masukkan nama pelanggan terlebih dahulu');
+    return;
   }
 
-  // Function bayar
-  function bayar(){
+  document.getElementById('status').innerHTML =
+  'Pembayaran berhasil untuk ' + nama;
 
-    // Update total terlebih dahulu
-    updateTotal();
+  let jam = parseInt(document.getElementById('jam').value) || 0;
 
-    // Mengambil nama pelanggan
-    let nama = document.getElementById('nama').value;
+  let hargaPerJam;
 
-    // Jika nama kosong
-    if(nama == ''){
-      alert('Masukkan nama pelanggan terlebih dahulu');
-      return;
-    }
-
-    // Menampilkan status berhasil
-    document.getElementById('status').innerHTML =
-    'Pembayaran berhasil untuk ' + nama;
-
-    // Mengambil jam main
-    let jam = parseInt(document.getElementById('jam').value) || 0;
-
-    let hargaPerJam;
-
-    // Menentukan tarif per jam
-    if(jam >= 3){
-      hargaPerJam = 5000;
-    } else {
-      hargaPerJam = 6000;
-    }
-
-    // Hitung total PS
-    let totalPs = jam * hargaPerJam;
-
-    // Hitung total keseluruhan
-    let total = totalPs + totalMenu;
-
-    // Tambah jumlah transaksi
-    jumlahTransaksi += 1;
-
-    // Tambah total pendapatan
-    totalPendapatan += total;
-
-    // Tampilkan jumlah transaksi
-    document.getElementById('jumlahTransaksi').innerHTML = jumlahTransaksi;
-
-    // Tampilkan total pendapatan
-    document.getElementById('totalPendapatan').innerHTML =
-    'Rp ' + totalPendapatan.toLocaleString('id-ID');
+  if(jam >= 3){
+    hargaPerJam = 5000;
+  } else {
+    hargaPerJam = 6000;
   }
 
-  // Function reset kasir
-  function resetKasir(){
+  let totalPs = jam * hargaPerJam;
 
-    // Mengosongkan input
-    document.getElementById('nama').value = '';
-    document.getElementById('jam').value = '';
+  let total = totalPs + totalMenu;
 
-    // Menghapus isi cart
-    document.getElementById('cart').innerHTML = '';
+  jumlahTransaksi += 1;
+  totalPendapatan += total;
 
-    // Menghapus status
-    document.getElementById('status').innerHTML = '';
+    simpanTransaksi(nama, jam, total);
 
-    // Reset total menu
-    totalMenu = 0;
+  document.getElementById('jumlahTransaksi').innerHTML = jumlahTransaksi;
 
-    // Update tampilan total
-    updateTotal();
-  }
+  document.getElementById('totalPendapatan').innerHTML =
+  'Rp ' + totalPendapatan.toLocaleString('id-ID');
+}
 
-  // Saat input jam berubah maka total otomatis update
-  document.getElementById('jam').addEventListener('input',updateTotal);
+function resetKasir(){
+
+  document.getElementById('nama').value = '';
+  document.getElementById('jam').value = '';
+  document.getElementById('cart').innerHTML = '';
+  document.getElementById('status').innerHTML = '';
+
+  totalMenu = 0;
+
+  updateTotal();
+}
+
+document.getElementById('jam').addEventListener('input',updateTotal);
 document.getElementById('uangBayar').addEventListener('input',updateTotal);
 
 </script>
+
 <style>
 .footer{
     width:100%;
@@ -587,11 +486,16 @@ document.getElementById('uangBayar').addEventListener('input',updateTotal);
 <footer class="footer">
     by asyraf
 </footer>
-  <script type="module">
+
+<script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import {
+  getDatabase,
+  ref,
+  push
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDtxgmyjXf-JTjpDNku_LZwO4GXniLvSVE",
@@ -606,9 +510,20 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const analytics = getAnalytics(app);
+const database = getDatabase(app);
+
+window.simpanTransaksi = function(nama,jam,total){
+
+  push(ref(database, 'transaksi'), {
+    nama: nama,
+    jam: jam,
+    total: total,
+    waktu: new Date().toLocaleString("id-ID")
+  });
+
+}
 
 </script>
-  
+
 </body>
 </html>

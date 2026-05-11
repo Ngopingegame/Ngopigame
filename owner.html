@@ -173,7 +173,16 @@ table td{
         </div>
 
     </div>
+<div class="table-card" style="margin-bottom:20px;">
 
+    <div class="card-title">
+        Monitoring Playstation
+    </div>
+
+    <div id="psOwner"></div>
+
+</div>
+    
     <div class="table-card">
 
         <div class="card-title">
@@ -342,6 +351,76 @@ onValue(transaksiRef, (snapshot) => {
     'Rp ' + pendapatan.toLocaleString('id-ID');
 
 });
+    function renderOwnerPS(){
+
+    let html = '';
+
+    daftarPS.forEach((ps)=>{
+
+        let sekarang = Date.now();
+
+        let sisa = 0;
+
+        if(ps.selesai){
+            sisa = ps.selesai - sekarang;
+        }
+
+        let status = 'Kosong';
+
+        let timer = '00:00:00';
+
+        if(sisa > 0){
+
+            status = 'Dipakai';
+
+            let jam = Math.floor(sisa / 1000 / 60 / 60);
+
+            let menit = Math.floor((sisa / 1000 / 60) % 60);
+
+            let detik = Math.floor((sisa / 1000) % 60);
+
+            timer =
+            String(jam).padStart(2,'0') + ':' +
+            String(menit).padStart(2,'0') + ':' +
+            String(detik).padStart(2,'0');
+
+        }
+
+        if(sisa <= 0 && ps.selesai){
+
+            status = 'WAKTU HABIS';
+
+            timer = '00:00:00';
+
+        }
+
+        html += `
+        <div class="ps-box">
+
+            <div class="ps-title">
+                ${ps.nama}
+            </div>
+
+            <div class="ps-status">
+                ${status}
+            </div>
+
+            <div class="ps-timer">
+                ${timer}
+            </div>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById('psOwner').innerHTML = html;
+
+}
+
+setInterval(renderOwnerPS,1000);
+
+renderOwnerPS();
 
 </script>
 

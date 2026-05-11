@@ -481,6 +481,59 @@ document.getElementById('uangBayar').addEventListener('input',updateTotal);
     opacity:0.7;
     text-shadow:0 0 10px #00ffcc;
 }
+  <div class="card" style="margin-top:20px;">
+
+    <h2 class="section-title">
+        Status Playstation
+    </h2>
+
+    <div id="psContainer"></div>
+
+</div>
+  .ps-box{
+    background:#111827;
+    padding:20px;
+    border-radius:16px;
+    margin-bottom:15px;
+    border:1px solid rgba(0,255,204,0.2);
+}
+
+.ps-title{
+    font-size:22px;
+    color:#00ffcc;
+    margin-bottom:10px;
+}
+
+.ps-status{
+    margin-bottom:10px;
+}
+
+.ps-timer{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.start-btn{
+    background:#00ffcc;
+    color:black;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-right:10px;
+}
+
+.stop-btn{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
 </style>
 
 <footer class="footer">
@@ -522,6 +575,123 @@ window.simpanTransaksi = function(nama,jam,total){
   });
 
 }
+  const daftarPS = [
+    {
+        nama:'PS1',
+        selesai:null
+    },
+    {
+        nama:'PS2',
+        selesai:null
+    },
+    {
+        nama:'PS3',
+        selesai:null
+    }
+];
+
+function renderPS(){
+
+    let html = '';
+
+    daftarPS.forEach((ps,index)=>{
+
+        let sekarang = Date.now();
+
+        let sisa = 0;
+
+        if(ps.selesai){
+            sisa = ps.selesai - sekarang;
+        }
+
+        let status = 'Kosong';
+
+        let timer = '00:00:00';
+
+        if(sisa > 0){
+
+            status = 'Dipakai';
+
+            let jam = Math.floor(sisa / 1000 / 60 / 60);
+
+            let menit = Math.floor((sisa / 1000 / 60) % 60);
+
+            let detik = Math.floor((sisa / 1000) % 60);
+
+            timer =
+            String(jam).padStart(2,'0') + ':' +
+            String(menit).padStart(2,'0') + ':' +
+            String(detik).padStart(2,'0');
+
+        }
+
+        if(sisa <= 0 && ps.selesai){
+
+            status = 'WAKTU HABIS';
+
+            timer = '00:00:00';
+
+        }
+
+        html += `
+        <div class="ps-box">
+
+            <div class="ps-title">
+                ${ps.nama}
+            </div>
+
+            <div class="ps-status">
+                ${status}
+            </div>
+
+            <div class="ps-timer">
+                ${timer}
+            </div>
+
+            <button class="start-btn"
+            onclick="mulaiPS(${index})">
+                MULAI
+            </button>
+
+            <button class="stop-btn"
+            onclick="stopPS(${index})">
+                STOP
+            </button>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById('psContainer').innerHTML = html;
+
+}
+
+window.mulaiPS = function(index){
+
+    let durasi = prompt('Masukkan durasi bermain (jam)');
+
+    if(!durasi) return;
+
+    let selesai = Date.now() + (durasi * 60 * 60 * 1000);
+
+    daftarPS[index].selesai = selesai;
+
+    renderPS();
+
+}
+
+window.stopPS = function(index){
+
+    daftarPS[index].selesai = null;
+
+    renderPS();
+
+}
+
+setInterval(renderPS,1000);
+
+renderPS();
 
 </script>
 

@@ -196,7 +196,12 @@ table td{
 </div>
 
 <script type="module">
-
+    
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
@@ -218,7 +223,18 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
+onAuthStateChanged(auth, (user) => {
+
+    if(!user){
+
+        window.location.href = "login.html";
+
+    }
+
+});
+    
 const database = getDatabase(app);
 
 window.hapusTransaksi = function(id){

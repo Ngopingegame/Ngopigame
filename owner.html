@@ -48,6 +48,17 @@ body{
     color:#94a3b8;
 }
 
+.logout-btn{
+    background:#00ffcc;
+    color:black;
+    border:none;
+    padding:12px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
 .grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -143,6 +154,10 @@ table td{
         <div class="sub">NGOPINGEGAME</div>
     </div>
 
+    <button class="logout-btn" onclick="logout()">
+        LOGOUT
+    </button>
+
     <div class="grid">
 
         <div class="card">
@@ -199,7 +214,8 @@ table td{
     
 import {
   getAuth,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -223,6 +239,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
 
 onAuthStateChanged(auth, (user) => {
@@ -234,6 +251,18 @@ onAuthStateChanged(auth, (user) => {
     }
 
 });
+
+window.logout = function(){
+
+    signOut(auth)
+
+    .then(() => {
+
+        window.location.href = "login.html";
+
+    })
+
+}
     
 const database = getDatabase(app);
 

@@ -648,11 +648,17 @@ document.getElementById('totalPendapatan').innerHTML =
 document.getElementById('status').innerHTML =
 'Pembayaran berhasil untuk ' + nama;
 
+const waktuSelesai =
+Date.now() + (jamMain * 60 * 60 * 1000);
+
 push(ref(database,'transaksi'),{
 nama:nama,
 ps:nomorPs,
 jam:jamMain,
 total:total,
+mulai: Date.now(),
+selesai: waktuSelesai,
+status:'main',
 waktu:new Date().toLocaleString('id-ID')
 });
 

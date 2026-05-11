@@ -481,20 +481,92 @@ setInterval(updateJam,1000);
 
 updateJam();
 
+function listMenu(){
+
+const cart = document.getElementById('cart');
+
+cart.innerHTML = '';
+
+daftarMenu.forEach((item,index)=>{
+
+cart.innerHTML += `
+<div class="cart-item">
+
+<div>
+${item.nama}<br>
+Rp ${item.harga.toLocaleString('id-ID')}
+</div>
+
+<button onclick="hapusMenu(${index})"
+style="
+background:#ef4444;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+">
+❌
+</button>
+
+</div>
+`;
+
+});
+
+}
+
 window.tambahMenu = function(nama,harga){
 
-    totalMenu += harga;
+daftarMenu.push({
+nama:nama,
+harga:harga
+});
 
-    const cart = document.getElementById('cart');
+totalMenu += harga;
 
-    cart.innerHTML += `
-    <div class="cart-item">
-        <span>${nama}</span>
-        <span>Rp ${harga.toLocaleString('id-ID')}</span>
-    </div>
-    `;
+listMenu();
 
-    updateTotal();
+updateTotal();
+
+}
+
+window.hapusMenu = function(index){
+
+totalMenu -= daftarMenu[index].harga;
+
+daftarMenu.splice(index,1);
+
+listMenu();
+
+updateTotal();
+
+}
+
+window.batalkanMenu = function(){
+
+if(daftarMenu.length <= 0){
+
+alert('Tidak ada menu');
+
+return;
+
+}
+
+let terakhir = daftarMenu.pop();
+
+totalMenu -= terakhir.harga;
+
+listMenu();
+
+updateTotal();
+
+}
+
+function renderCart(){
+
+listMenu();
 
 }
 

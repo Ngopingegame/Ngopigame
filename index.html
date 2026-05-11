@@ -1,511 +1,223 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NGOPINGEGAME - Kasir Modern</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #050816;
-      color: white;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 1300px;
-      margin: auto;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-      padding: 20px;
-      background: #0f172a;
-      border-radius: 20px;
-      border: 1px solid rgba(0,255,204,0.2);
-      box-shadow: 0 0 20px rgba(0,255,204,0.1);
-    }
-
-    .logo {
-      font-size: 34px;
-      font-weight: bold;
-      color: #00ffcc;
-      text-shadow: 0 0 12px #00ffcc;
-    }
-
-    .jam {
-      font-size: 18px;
-      color: #94a3b8;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 20px;
-    }
-
-    .card {
-      background: #0f172a;
-      border-radius: 20px;
-      padding: 20px;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 0 15px rgba(0,255,204,0.08);
-    }
-
-    .section-title {
-      color: #00ffcc;
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-
-    .input-group {
-      margin-bottom: 15px;
-    }
-
-    .input-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: #cbd5e1;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: none;
-      background: #1e293b;
-      color: white;
-      font-size: 16px;
-    }
-
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .menu-btn {
-      background: #111827;
-      border: 1px solid #00ffcc;
-      border-radius: 16px;
-      padding: 18px;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
-      text-align: center;
-    }
-
-    .menu-btn:hover {
-      transform: scale(1.05);
-      background: #00ffcc;
-      color: black;
-      font-weight: bold;
-    }
-
-    .menu-name {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .menu-price {
-      font-size: 15px;
-    }
-
-    .cart {
-      max-height: 350px;
-      overflow-y: auto;
-      margin-bottom: 20px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px;
-      background: #111827;
-      border-radius: 12px;
-      margin-bottom: 10px;
-    }
-
-    .summary {
-      margin-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 20px;
-    }
-
-    .summary-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      color: #cbd5e1;
-    }
-
-    .total {
-      font-size: 30px;
-      color: #00ffcc;
-      margin-top: 15px;
-      text-shadow: 0 0 10px #00ffcc;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 14px;
-      margin-top: 15px;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: bold;
-      transition: 0.2s;
-    }
-
-    .btn-bayar {
-      background: #00ffcc;
-      color: black;
-    }
-
-    .btn-reset {
-      background: #ef4444;
-      color: white;
-    }
-
-    .btn:hover {
-      transform: scale(1.02);
-    }
-
-    .status {
-      margin-top: 15px;
-      text-align: center;
-      color: #22c55e;
-      font-weight: bold;
-    }
-
-    @media(max-width:900px){
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<div class="container">
-
-  <div class="header">
-    <div class="logo">NGOPINGEGAME</div>
-    <div class="jam" id="jamRealtime"></div>
-  </div>
-
-  <div class="grid">
-
-    <div class="card">
-
-      <h2 class="section-title">Data pelanggan</h2>
-
-      <div class="input-group">
-        <label>Nama Pelanggan</label>
-        <input type="text" id="nama" placeholder="Masukkan nama pelanggan">
-      </div>
-
-      <div class="input-group">
-        <label>Pilih Playstation</label>
-        <select id="jenisPs">
-          <option>PS4</option>
-          <option>PS5</option>
-        </select>
-      </div>
-
-      <div class="input-group">
-        <label>Jam Main</label>
-        <input type="number" id="jam" placeholder="Masukkan jam bermain">
-      </div>
-
-      <h2 class="section-title">Menu Makanan & Minuman</h2>
-
-      <div class="menu-grid">
-
-        <div class="menu-btn" onclick="tambahMenu('Mie Rebus',6000)">
-          <div class="menu-name">Mie Rebus</div>
-          <div class="menu-price">Rp 6.000</div>
-        </div>
-
-        <div class="menu-btn" onclick="tambahMenu('Kopi Hitam',3000)">
-          <div class="menu-name">Kopi Hitam</div>
-          <div class="menu-price">Rp 3.000</div>
-        </div>
-
-        <div class="menu-btn" onclick="tambahMenu('Teh Hangat',3000)">
-          <div class="menu-name">Teh Hangat</div>
-          <div class="menu-price">Rp 3.000</div>
-        </div>
-
-        <div class="menu-btn" onclick="tambahMenu('Es Teh',4000)">
-          <div class="menu-name">Es Teh</div>
-          <div class="menu-price">Rp 4.000</div>
-        </div>
-
-        <div class="menu-btn" onclick="tambahMenu('Es Nutrisari',4000)">
-          <div class="menu-name">Es Nutrisari</div>
-          <div class="menu-price">Rp 4.000</div>
-        </div>
-
-        <div class="menu-btn" onclick="tambahMenu('Es Susu',5000)">
-          <div class="menu-name">Es Susu</div>
-          <div class="menu-price">Rp 5.000</div>
-        </div>
-
-        <div class="menu-btn" onclick="tambahMenu('Good Day Freeze',5000)">
-          <div class="menu-name">Good Day Freeze</div>
-          <div class="menu-price">Rp 5.000</div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <h2 class="section-title">Kasir & Struk</h2>
-
-      <div class="cart" id="cart"></div>
-
-      <div class="summary">
-
-        <div class="input-group" style="margin-bottom:20px;">
-          <label>Uang Pembayaran</label>
-          <input type="number" id="uangBayar" placeholder="Masukkan uang pelanggan">
-        </div>
-
-        <div class="summary-item">
-          <span>Kembalian</span>
-          <span id="kembalian">Rp 0</span>
-        </div>
-
-        <div class="summary-item">
-          <span>Biaya PS</span>
-          <span id="biayaPs">Rp 0</span>
-        </div>
-
-        <div class="summary-item">
-          <span>Makanan & Minuman</span>
-          <span id="biayaMenu">Rp 0</span>
-        </div>
-
-        <div class="total" id="totalBayar">
-          Rp 0
-        </div>
-
-      </div>
-
-      <button class="btn btn-bayar" onclick="bayar()">
-        BAYAR SEKARANG
-      </button>
-
-      <button class="btn btn-reset" onclick="resetKasir()">
-        RESET KASIR
-      </button>
-
-      <div class="status" id="status"></div>
-
-      <div class="summary" style="margin-top:30px;">
-        <h3 style="margin-bottom:15px;color:#00ffcc;">Rangkuman Penjualan</h3>
-
-        <div class="summary-item">
-          <span>Total Transaksi</span>
-          <span id="jumlahTransaksi">0</span>
-        </div>
-
-        <div class="summary-item">
-          <span>Total Pendapatan</span>
-          <span id="totalPendapatan">Rp 0</span>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-<script>
-
-let totalMenu = 0;
-let jumlahTransaksi = 0;
-let totalPendapatan = 0;
-
-function updateJam(){
-  const now = new Date();
-  document.getElementById('jamRealtime').innerHTML = now.toLocaleString('id-ID');
-}
-
-setInterval(updateJam,1000);
-updateJam();
-
-function tambahMenu(nama,harga){
-
-  totalMenu += harga;
-
-  const cart = document.getElementById('cart');
-
-  cart.innerHTML += `
-    <div class="cart-item">
-      <span>${nama}</span>
-      <span>Rp ${harga.toLocaleString('id-ID')}</span>
-    </div>
-  `;
-
-  updateTotal();
-}
-
-function updateTotal(){
-
-  let jam = parseInt(document.getElementById('jam').value) || 0;
-
-  let hargaPerJam;
-
-  if(jam >= 3){
-    hargaPerJam = 5000;
-  } else {
-    hargaPerJam = 6000;
-  }
-
-  let totalPs = jam * hargaPerJam;
-
-  let total = totalPs + totalMenu;
-
-  let uangBayar = parseInt(document.getElementById('uangBayar').value) || 0;
-
-  let kembali = uangBayar - total;
-
-  if(kembali < 0){
-    kembali = 0;
-  }
-
-  document.getElementById('biayaPs').innerHTML =
-  'Rp ' + totalPs.toLocaleString('id-ID');
-
-  document.getElementById('biayaMenu').innerHTML =
-  'Rp ' + totalMenu.toLocaleString('id-ID');
-
-  document.getElementById('totalBayar').innerHTML =
-  'Rp ' + total.toLocaleString('id-ID');
-
-  document.getElementById('kembalian').innerHTML =
-  'Rp ' + kembali.toLocaleString('id-ID');
-}
-
-function bayar(){
-
-  updateTotal();
-
-  let nama = document.getElementById('nama').value;
-
-  if(nama == ''){
-    alert('Masukkan nama pelanggan terlebih dahulu');
-    return;
-  }
-
-  document.getElementById('status').innerHTML =
-  'Pembayaran berhasil untuk ' + nama;
-
-  let jam = parseInt(document.getElementById('jam').value) || 0;
-
-  let hargaPerJam;
-
-  if(jam >= 3){
-    hargaPerJam = 5000;
-  } else {
-    hargaPerJam = 6000;
-  }
-
-  let totalPs = jam * hargaPerJam;
-
-  let total = totalPs + totalMenu;
-
-  jumlahTransaksi += 1;
-  totalPendapatan += total;
-
-    simpanTransaksi(nama, jam, total);
-
-  document.getElementById('jumlahTransaksi').innerHTML = jumlahTransaksi;
-
-  document.getElementById('totalPendapatan').innerHTML =
-  'Rp ' + totalPendapatan.toLocaleString('id-ID');
-}
-
-function resetKasir(){
-
-  document.getElementById('nama').value = '';
-  document.getElementById('jam').value = '';
-  document.getElementById('cart').innerHTML = '';
-  document.getElementById('status').innerHTML = '';
-
-  totalMenu = 0;
-
-  updateTotal();
-}
-
-document.getElementById('jam').addEventListener('input',updateTotal);
-document.getElementById('uangBayar').addEventListener('input',updateTotal);
-
-</script>
+<title>NGOPINGEGAME - Kasir Modern</title>
 
 <style>
-.footer{
-    width:100%;
-    text-align:center;
-    margin-top:40px;
-    padding:18px;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#050816;
+    color:white;
+    min-height:100vh;
+    padding:20px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    padding:20px;
+    background:#0f172a;
+    border-radius:20px;
+    border:1px solid rgba(0,255,204,0.2);
+    box-shadow:0 0 20px rgba(0,255,204,0.1);
+}
+
+.logo{
+    font-size:34px;
+    font-weight:bold;
     color:#00ffcc;
-    font-size:10px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    opacity:0.7;
+    text-shadow:0 0 12px #00ffcc;
+}
+
+.jam{
+    font-size:18px;
+    color:#94a3b8;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:#0f172a;
+    border-radius:20px;
+    padding:20px;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 0 15px rgba(0,255,204,0.08);
+}
+
+.section-title{
+    color:#00ffcc;
+    margin-bottom:20px;
+    font-size:24px;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    color:#cbd5e1;
+}
+
+input,
+select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    background:#1e293b;
+    color:white;
+    font-size:16px;
+}
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.menu-btn{
+    background:#111827;
+    border:1px solid #00ffcc;
+    border-radius:16px;
+    padding:18px;
+    color:white;
+    cursor:pointer;
+    transition:0.2s;
+    text-align:center;
+}
+
+.menu-btn:hover{
+    transform:scale(1.05);
+    background:#00ffcc;
+    color:black;
+    font-weight:bold;
+}
+
+.menu-name{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.menu-price{
+    font-size:15px;
+}
+
+.cart{
+    max-height:350px;
+    overflow-y:auto;
+    margin-bottom:20px;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px;
+    background:#111827;
+    border-radius:12px;
+    margin-bottom:10px;
+}
+
+.summary{
+    margin-top:20px;
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding-top:20px;
+}
+
+.summary-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    color:#cbd5e1;
+}
+
+.total{
+    font-size:30px;
+    color:#00ffcc;
+    margin-top:15px;
     text-shadow:0 0 10px #00ffcc;
 }
-  <div class="card" style="margin-top:20px;">
 
-    <h2 class="section-title">
-        Status Playstation
-    </h2>
+.btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    margin-top:15px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    transition:0.2s;
+}
 
-    <div id="psContainer"></div>
+.btn-bayar{
+    background:#00ffcc;
+    color:black;
+}
 
-</div>
-  .ps-box{
+.btn-reset{
+    background:#ef4444;
+    color:white;
+}
+
+.btn:hover{
+    transform:scale(1.02);
+}
+
+.status{
+    margin-top:15px;
+    text-align:center;
+    color:#22c55e;
+    font-weight:bold;
+}
+
+.ps-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-top:20px;
+}
+
+.ps-box{
     background:#111827;
     padding:20px;
     border-radius:16px;
-    margin-bottom:15px;
     border:1px solid rgba(0,255,204,0.2);
 }
 
 .ps-title{
-    font-size:22px;
+    font-size:24px;
     color:#00ffcc;
     margin-bottom:10px;
 }
 
 .ps-status{
     margin-bottom:10px;
+    font-size:16px;
 }
 
 .ps-timer{
@@ -534,7 +246,194 @@ document.getElementById('uangBayar').addEventListener('input',updateTotal);
     cursor:pointer;
     font-weight:bold;
 }
+
+.footer{
+    width:100%;
+    text-align:center;
+    margin-top:40px;
+    padding:18px;
+    color:#00ffcc;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    opacity:0.7;
+    text-shadow:0 0 10px #00ffcc;
+}
+
+@media(max-width:900px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+
+}
+
 </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">NGOPINGEGAME</div>
+        <div class="jam" id="jamRealtime"></div>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h2 class="section-title">Data Pelanggan</h2>
+
+            <div class="input-group">
+                <label>Nama Pelanggan</label>
+                <input type="text" id="nama" placeholder="Masukkan nama pelanggan">
+            </div>
+
+            <div class="input-group">
+                <label>Nomor Playstation</label>
+                <select id="nomorPs">
+                    <option>PS1</option>
+                    <option>PS2</option>
+                    <option>PS3</option>
+                    <option>PS4</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Jenis Playstation</label>
+                <select id="jenisPs">
+                    <option>PS4</option>
+                    <option>PS5</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Jam Main</label>
+                <input type="number" id="jam" placeholder="Masukkan jam bermain">
+            </div>
+
+            <h2 class="section-title">Menu Makanan & Minuman</h2>
+
+            <div class="menu-grid">
+
+                <div class="menu-btn" onclick="tambahMenu('Mie Rebus',6000)">
+                    <div class="menu-name">Mie Rebus</div>
+                    <div class="menu-price">Rp 6.000</div>
+                </div>
+
+                <div class="menu-btn" onclick="tambahMenu('Kopi Hitam',3000)">
+                    <div class="menu-name">Kopi Hitam</div>
+                    <div class="menu-price">Rp 3.000</div>
+                </div>
+
+                <div class="menu-btn" onclick="tambahMenu('Teh Hangat',3000)">
+                    <div class="menu-name">Teh Hangat</div>
+                    <div class="menu-price">Rp 3.000</div>
+                </div>
+
+                <div class="menu-btn" onclick="tambahMenu('Es Teh',4000)">
+                    <div class="menu-name">Es Teh</div>
+                    <div class="menu-price">Rp 4.000</div>
+                </div>
+
+                <div class="menu-btn" onclick="tambahMenu('Es Susu',5000)">
+                    <div class="menu-name">Es Susu</div>
+                    <div class="menu-price">Rp 5.000</div>
+                </div>
+
+                <div class="menu-btn" onclick="tambahMenu('Good Day Freeze',5000)">
+                    <div class="menu-name">Good Day Freeze</div>
+                    <div class="menu-price">Rp 5.000</div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2 class="section-title">Kasir & Struk</h2>
+
+            <div class="cart" id="cart"></div>
+
+            <div class="summary">
+
+                <div class="input-group" style="margin-bottom:20px;">
+                    <label>Uang Pembayaran</label>
+                    <input type="number" id="uangBayar" placeholder="Masukkan uang pelanggan">
+                </div>
+
+                <div class="summary-item">
+                    <span>Kembalian</span>
+                    <span id="kembalian">Rp 0</span>
+                </div>
+
+                <div class="summary-item">
+                    <span>Biaya PS</span>
+                    <span id="biayaPs">Rp 0</span>
+                </div>
+
+                <div class="summary-item">
+                    <span>Makanan & Minuman</span>
+                    <span id="biayaMenu">Rp 0</span>
+                </div>
+
+                <div class="total" id="totalBayar">
+                    Rp 0
+                </div>
+
+            </div>
+
+            <button class="btn btn-bayar" onclick="bayar()">
+                BAYAR SEKARANG
+            </button>
+
+            <button class="btn btn-reset" onclick="resetKasir()">
+                RESET KASIR
+            </button>
+
+            <div class="status" id="status"></div>
+
+            <div class="summary" style="margin-top:30px;">
+
+                <h3 style="margin-bottom:15px;color:#00ffcc;">
+                    Rangkuman Penjualan
+                </h3>
+
+                <div class="summary-item">
+                    <span>Total Transaksi</span>
+                    <span id="jumlahTransaksi">0</span>
+                </div>
+
+                <div class="summary-item">
+                    <span>Total Pendapatan</span>
+                    <span id="totalPendapatan">Rp 0</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+
+        <h2 class="section-title">
+            Status Playstation
+        </h2>
+
+        <div class="ps-grid" id="psContainer"></div>
+
+    </div>
+
+</div>
 
 <footer class="footer">
     by asyraf
@@ -545,49 +444,189 @@ document.getElementById('uangBayar').addEventListener('input',updateTotal);
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-  getDatabase,
-  ref,
-  push
+    getDatabase,
+    ref,
+    push
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDtxgmyjXf-JTjpDNku_LZwO4GXniLvSVE",
-  authDomain: "ngopingegame-3e92c.firebaseapp.com",
-  databaseURL: "https://ngopingegame-3e92c-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "ngopingegame-3e92c",
-  storageBucket: "ngopingegame-3e92c.firebasestorage.app",
-  messagingSenderId: "810064465459",
-  appId: "1:810064465459:web:b8564ed2898f41d24e5d46",
-  measurementId: "G-Y8PSYJDYD4"
+    apiKey: "AIzaSyDtxgmyjXf-JTjpDNku_LZwO4GXniLvSVE",
+    authDomain: "ngopingegame-3e92c.firebaseapp.com",
+    databaseURL: "https://ngopingegame-3e92c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "ngopingegame-3e92c",
+    storageBucket: "ngopingegame-3e92c.firebasestorage.app",
+    messagingSenderId: "810064465459",
+    appId: "1:810064465459:web:b8564ed2898f41d24e5d46",
+    measurementId: "G-Y8PSYJDYD4"
 };
 
 const app = initializeApp(firebaseConfig);
 
 const database = getDatabase(app);
 
-window.simpanTransaksi = function(nama,jam,total){
+let totalMenu = 0;
+let jumlahTransaksi = 0;
+let totalPendapatan = 0;
 
-  push(ref(database, 'transaksi'), {
-    nama: nama,
-    jam: jam,
-    total: total,
-    waktu: new Date().toLocaleString("id-ID")
-  });
+function updateJam(){
+
+    const now = new Date();
+
+    document.getElementById('jamRealtime').innerHTML =
+    now.toLocaleString('id-ID');
 
 }
-  const daftarPS = [
+
+setInterval(updateJam,1000);
+
+updateJam();
+
+window.tambahMenu = function(nama,harga){
+
+    totalMenu += harga;
+
+    const cart = document.getElementById('cart');
+
+    cart.innerHTML += `
+    <div class="cart-item">
+        <span>${nama}</span>
+        <span>Rp ${harga.toLocaleString('id-ID')}</span>
+    </div>
+    `;
+
+    updateTotal();
+
+}
+
+function updateTotal(){
+
+    let jam = parseInt(document.getElementById('jam').value) || 0;
+
+    let hargaPerJam = jam >= 3 ? 5000 : 6000;
+
+    let totalPs = jam * hargaPerJam;
+
+    let total = totalPs + totalMenu;
+
+    let uangBayar =
+    parseInt(document.getElementById('uangBayar').value) || 0;
+
+    let kembali = uangBayar - total;
+
+    if(kembali < 0){
+        kembali = 0;
+    }
+
+    document.getElementById('biayaPs').innerHTML =
+    'Rp ' + totalPs.toLocaleString('id-ID');
+
+    document.getElementById('biayaMenu').innerHTML =
+    'Rp ' + totalMenu.toLocaleString('id-ID');
+
+    document.getElementById('totalBayar').innerHTML =
+    'Rp ' + total.toLocaleString('id-ID');
+
+    document.getElementById('kembalian').innerHTML =
+    'Rp ' + kembali.toLocaleString('id-ID');
+
+}
+
+window.bayar = function(){
+
+    updateTotal();
+
+    let nama = document.getElementById('nama').value;
+
+    let nomorPs = document.getElementById('nomorPs').value;
+
+    let jamMain =
+    parseInt(document.getElementById('jam').value) || 0;
+
+    if(nama == ''){
+
+        alert('Masukkan nama pelanggan');
+
+        return;
+
+    }
+
+    let hargaPerJam = jamMain >= 3 ? 5000 : 6000;
+
+    let totalPs = jamMain * hargaPerJam;
+
+    let total = totalPs + totalMenu;
+
+    jumlahTransaksi++;
+
+    totalPendapatan += total;
+
+    document.getElementById('jumlahTransaksi').innerHTML =
+    jumlahTransaksi;
+
+    document.getElementById('totalPendapatan').innerHTML =
+    'Rp ' + totalPendapatan.toLocaleString('id-ID');
+
+    document.getElementById('status').innerHTML =
+    'Pembayaran berhasil untuk ' + nama;
+
+    push(ref(database,'transaksi'),{
+        nama:nama,
+        ps:nomorPs,
+        jam:jamMain,
+        total:total,
+        waktu:new Date().toLocaleString('id-ID')
+    });
+
+    mulaiPSOtomatis(nomorPs,jamMain);
+
+}
+
+window.resetKasir = function(){
+
+    document.getElementById('nama').value = '';
+
+    document.getElementById('jam').value = '';
+
+    document.getElementById('uangBayar').value = '';
+
+    document.getElementById('cart').innerHTML = '';
+
+    document.getElementById('status').innerHTML = '';
+
+    totalMenu = 0;
+
+    updateTotal();
+
+}
+
+document.getElementById('jam')
+.addEventListener('input',updateTotal);
+
+document.getElementById('uangBayar')
+.addEventListener('input',updateTotal);
+
+const daftarPS = [
+
     {
         nama:'PS1',
         selesai:null
     },
+
     {
         nama:'PS2',
         selesai:null
     },
+
     {
         nama:'PS3',
         selesai:null
+    },
+
+    {
+        nama:'PS4',
+        selesai:null
     }
+
 ];
 
 function renderPS(){
@@ -601,7 +640,9 @@ function renderPS(){
         let sisa = 0;
 
         if(ps.selesai){
+
             sisa = ps.selesai - sekarang;
+
         }
 
         let status = 'Kosong';
@@ -612,11 +653,14 @@ function renderPS(){
 
             status = 'Dipakai';
 
-            let jam = Math.floor(sisa / 1000 / 60 / 60);
+            let jam =
+            Math.floor(sisa / 1000 / 60 / 60);
 
-            let menit = Math.floor((sisa / 1000 / 60) % 60);
+            let menit =
+            Math.floor((sisa / 1000 / 60) % 60);
 
-            let detik = Math.floor((sisa / 1000) % 60);
+            let detik =
+            Math.floor((sisa / 1000) % 60);
 
             timer =
             String(jam).padStart(2,'0') + ':' +
@@ -663,17 +707,20 @@ function renderPS(){
 
     });
 
-    document.getElementById('psContainer').innerHTML = html;
+    document.getElementById('psContainer').innerHTML =
+    html;
 
 }
 
 window.mulaiPS = function(index){
 
-    let durasi = prompt('Masukkan durasi bermain (jam)');
+    let durasi =
+    prompt('Masukkan durasi bermain (jam)');
 
     if(!durasi) return;
 
-    let selesai = Date.now() + (durasi * 60 * 60 * 1000);
+    let selesai =
+    Date.now() + (durasi * 60 * 60 * 1000);
 
     daftarPS[index].selesai = selesai;
 
@@ -684,6 +731,23 @@ window.mulaiPS = function(index){
 window.stopPS = function(index){
 
     daftarPS[index].selesai = null;
+
+    renderPS();
+
+}
+
+function mulaiPSOtomatis(namaPS,jamMain){
+
+    daftarPS.forEach((ps)=>{
+
+        if(ps.nama == namaPS){
+
+            ps.selesai =
+            Date.now() + (jamMain * 60 * 60 * 1000);
+
+        }
+
+    });
 
     renderPS();
 

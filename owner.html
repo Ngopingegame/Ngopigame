@@ -301,6 +301,8 @@ onValue(transaksiRef, (snapshot) => {
 
     let data = snapshot.val();
 
+    renderOwnerPS(data);
+    
     let tabel = '';
 
     let jumlah = 0;
@@ -351,77 +353,84 @@ onValue(transaksiRef, (snapshot) => {
     'Rp ' + pendapatan.toLocaleString('id-ID');
 
 });
-    function renderOwnerPS(){
+    function renderOwnerPS(data){
 
     let html = '';
 
-    daftarPS.forEach((ps)=>{
+    if(data){
 
-        let sekarang = Date.now();
+        for(let id in data){
 
-        let sisa = 0;
+            let transaksi = data[id];
 
-        if(ps.selesai){
-            sisa = ps.selesai - sekarang;
+            let sisa = 0;
+
+            if(transaksi.selesai){
+
+                sisa = transaksi.selesai - Date.now();
+
+            }
+
+            let status = 'Kosong';
+
+            let timer = '00:00:00';
+
+            if(sisa > 0){
+
+                status = 'Dipakai';
+
+                let jam =
+                Math.floor(sisa / 1000 / 60 / 60);
+
+                let menit =
+                Math.floor((sisa / 1000 / 60) % 60);
+
+                let detik =
+                Math.floor((sisa / 1000) % 60);
+
+                timer =
+                String(jam).padStart(2,'0') + ':' +
+                String(menit).padStart(2,'0') + ':' +
+                String(detik).padStart(2,'0');
+
+            }else if(transaksi.selesai){
+
+                status = 'WAKTU HABIS';
+
+                timer = '00:00:00';
+
+            }
+
+            html += `
+            <div class="ps-box">
+
+                <div class="ps-title">
+                    ${transaksi.ps}
+                </div>
+
+                <div class="ps-status">
+                    ${status}
+                </div>
+
+                <div>
+                    ${transaksi.nama}
+                </div>
+
+                <div class="ps-timer">
+                    ${timer}
+                </div>
+
+            </div>
+            `;
+
         }
 
-        let status = 'Kosong';
+    }
 
-        let timer = '00:00:00';
-
-        if(sisa > 0){
-
-            status = 'Dipakai';
-
-            let jam = Math.floor(sisa / 1000 / 60 / 60);
-
-            let menit = Math.floor((sisa / 1000 / 60) % 60);
-
-            let detik = Math.floor((sisa / 1000) % 60);
-
-            timer =
-            String(jam).padStart(2,'0') + ':' +
-            String(menit).padStart(2,'0') + ':' +
-            String(detik).padStart(2,'0');
-
-        }
-
-        if(sisa <= 0 && ps.selesai){
-
-            status = 'WAKTU HABIS';
-
-            timer = '00:00:00';
-
-        }
-
-        html += `
-        <div class="ps-box">
-
-            <div class="ps-title">
-                ${ps.nama}
-            </div>
-
-            <div class="ps-status">
-                ${status}
-            </div>
-
-            <div class="ps-timer">
-                ${timer}
-            </div>
-
-        </div>
-        `;
-
-    });
-
-    document.getElementById('psOwner').innerHTML = html;
+    document.getElementById('psOwner').innerHTML =
+    html;
 
 }
-
-setInterval(renderOwnerPS,1000);
-
-renderOwnerPS();
-
 </script>
 
 </body>
